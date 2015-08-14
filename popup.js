@@ -1,24 +1,50 @@
-window.addEventListener("load", function(e)
-{
-	var vn = document.querySelector('#vhost_name');
-	vn.addEventListener("keyup", update);
-	vn.value = chrome.extension.getBackgroundPage().vhost;
-	var ve = document.querySelector('#vhost_enable');
-	ve.addEventListener("change", tick);
-	ve.checked = chrome.extension.getBackgroundPage().enabled ? true : false;
-	chrome.browserAction.setIcon({path: (chrome.extension.getBackgroundPage().enabled ? 'enabled' : 'disabled') + '.png'})
-}, false);
+var vhost,
+    ip,
+    enabled,
+    background;
 
-function update(e)
-{
-	chrome.extension.getBackgroundPage().vhost = e.target.value;
-	chrome.extension.getBackgroundPage().enabled = true;
-	document.getElementById("vhost_enable").checked = true;
-	chrome.browserAction.setIcon({path: 'enabled.png'})
-}
+var loadHandler = function() {
+  // assign elements to variables for future references
+  vhost = document.querySelector('#vhost_name');
+  ip = document.querySelector('#vhost_ip');
+  enabled = document.querySelector('#vhost_enable');
+  background = chrome.extension.getBackgroundPage();
 
-function tick(e)
+  // add a listener to each input and set the value from the background
+  vhost.addEventListener("keyup", updateHandler, false);
+  vhost.value = background.settings.vhost;
+
+  ip.addEventListener("keyup", updateHandler, false);
+  ip.value = background.settings.ip;
+
+  enabled.addEventListener("change", updateHandler, false);
+  enabled.checked = background.settings.enabled;
+
+  updateIcons();
+};
+
+var updateIcons = function() {
+  chrome.browserAction.setIcon({path: (background.settings.enabled ? 'enabled' : 'disabled') + '.png'});
+};
+
+var updateHandler = function(e)
 {
-	chrome.extension.getBackgroundPage().enabled = e.target.checked;
-	chrome.browserAction.setIcon({path: (e.target.checked ? 'enabled' : 'disabled') + '.png'})
-}
+  var settings = {
+    'vhost': vhost.value,
+    'ip': ip.value,
+    'enabled': enabled.checked
+  };
+
+  // set the background settings
+  background.settings.vhost = settings.vhost;
+  background.settings.ip = settings.ip;
+  background.settings.enabled = settings.enabled;
+
+  updateIcons();
+
+  // persist settings
+  chrome.storage.local.set(settings);
+};
+
+// init
+document.addEventListener('DOMContentLoaded', loadHandler);
