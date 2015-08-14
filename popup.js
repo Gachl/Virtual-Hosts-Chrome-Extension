@@ -43,7 +43,7 @@ var updateHandler = function(e)
   updateIcons();
 
   // persist settings
-  chrome.storage.local.set(settings);
+  chrome.storage.sync.set(settings);
 };
 
 // init

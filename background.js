@@ -16,7 +16,7 @@ var settings = {
       }
     };
 
-chrome.storage.local.get(settings, function(result) {
+chrome.storage.sync.get(settings, function(result) {
   if(result.domain) settings.domain = result.domain;
   if(result.ip) settings.ip = result.ip;
   if(result.enabled) settings.enabled = result.enabled;
