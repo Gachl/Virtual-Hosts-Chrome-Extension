@@ -11,7 +11,7 @@ Please do not monetize on this code, keep it open and free.  Fork and pull if yo
 
 Install the extension, click the extension icon to open the settings popup.  Enter your domain name in the `Request VHost` and your server IP address is the `VHost IP` box.  Tick the `Enable` box.  In Chrome, visit the VHost IP and viola!  Just like editing the hosts file but without the annoyance.
 
-Settings are synced via Chrome to other machines.  Awesome! :thumbsup:
+~~Settings are synced via Chrome to other machines~~ (coming soon).  Awesome! :thumbsup:
 
 ## What is the purpose of this?
 
