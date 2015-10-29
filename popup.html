@@ -2,10 +2,10 @@
 <html>
   <head>
     <title>Request VHost</title>
-    <style>
+    <style type="text/css">
       body {
-		font-family: verdana, sans-serif;
-		font-size: 10pt;
+        font-family: verdana, sans-serif;
+        font-size: 10pt;
         min-width: 200px;
         overflow-x: hidden;
       }
@@ -18,11 +18,13 @@
         height: 75px;
       }
     </style>
-    <script src="popup.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
   </head>
   <body>
-	Request VHost:<br>
-	<input type="text" id="vhost_name" placeholder="dev.yourhost.com"><br>
-	Enable: <input type="checkbox" id="vhost_enable">
+    VHost Domain:<br/>
+    <input type="text" id="vhost_domain" placeholder="dev.yourhost.com"/><br/>
+    VHost IP:<br/>
+    <input type="text" id="vhost_ip" placeholder="127.0.0.1"/><br/>
+    Enable: <input type="checkbox" id="vhost_enable"/>
   </body>
 </html>
