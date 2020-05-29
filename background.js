@@ -19,7 +19,7 @@ var settings = {
 chrome.storage.sync.get(settings, function(result) {
   if(result.domain) settings.domain = result.domain;
   if(result.ip) settings.ip = result.ip;
-  if(result.enabled) settings.enabled = result.enabled;
+  if(result.hasOwnProperty('enabled')) settings.enabled = result.enabled;
   chrome.browserAction.setIcon({path: (settings.enabled ? 'enabled' : 'disabled') + '.png'});
 });
 
